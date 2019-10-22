@@ -7,7 +7,7 @@ from flask_googlecharts import GoogleCharts, MaterialLineChart, PieChart
 from flask_googlecharts import BarChart
 from flask_googlecharts.utils import prep_data
 import datetime
-
+from ChurnPred import churn
 
 
 app = Flask(__name__)
@@ -71,18 +71,38 @@ def chart2():
     charts.register(pie_chart)
     return render_template("GoogleChart.html")
 
-'''@app.route("/simple_chart")
-def chart():
-    legend = 'Monthly Data'
-    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
-    values = [10, 9, 8, 7, 6, 4, 7, 8]
-    return render_template('chart.html', values=values, labels=labels, legend=legend)
+@app.route('/googlechart1')
+def chartR():
+    obj = churn()
+    train_left_count = obj.left_count[1]
+    train_notleft_count = obj.left_count[0]
+    hot_dog_chart = BarChart("hot_dogs", options={"title": "Employee Churn",
+                                                  "width": 500,
+                                                  "height": 300})
+    hot_dog_chart.add_column("string", "Employee Status")
+    hot_dog_chart.add_column("number", "No.of Employees")
+    hot_dog_chart.add_rows([["left",int(train_left_count)],
+                            ["Not left",int(train_notleft_count)]])
+    charts.register(hot_dog_chart)
+    spectators_chart = MaterialLineChart("spectators",
+                                         options={"title": "Contest Spectators",
+                                                  "width": 500,
+                                                  "height": 300},
+                                         data_url=url_for('data'))
 
-@app.route("/chart1")
-def chart1():
-    labels = ["January","February","March","April","May","June","July","August"]
-    values = [10,9,8,7,6,4,7,8]
-    return render_template('chart1.html', values=values, labels=labels)'''
+    charts.register(spectators_chart)
+
+    pie_chart= PieChart("pie_chart",options={"title":"Employee Churn",
+                                        "width":500,
+                                        "height":300})
+    pie_chart.add_column("string","Employee Status")
+    pie_chart.add_column("number","Number")
+    pie_chart.add_rows([["left",int(train_left_count)],
+                        ["Not left",int(train_notleft_count)]])
+    charts.register(pie_chart)
+    return render_template("GoogleChart.html")
+
+
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
