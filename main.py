@@ -16,9 +16,7 @@ charts.init_app(app)
 
 mysql_server="localhost"
 # app.config.from_pyfile("config.cfg")
-@app.route('/')
-def index():
-    return render_template("index.html")
+
 
 @app.route('/google-charts/pie-chart')
 def google_pie_chart():
@@ -71,11 +69,13 @@ def chart2():
     charts.register(pie_chart)
     return render_template("GoogleChart.html")
 
-@app.route('/googlechart1')
-def chartR():
+@app.route('/')
+def index():
     obj = churn()
     train_left_count = obj.left_count[1]
     train_notleft_count = obj.left_count[0]
+    test_left_count = obj.pred_count[1]
+    test_notleft_count = obj.pred_count[0]
     hot_dog_chart = BarChart("hot_dogs", options={"title": "Employee Churn",
                                                   "width": 500,
                                                   "height": 300})
@@ -100,7 +100,24 @@ def chartR():
     pie_chart.add_rows([["left",int(train_left_count)],
                         ["Not left",int(train_notleft_count)]])
     charts.register(pie_chart)
-    return render_template("GoogleChart.html")
+    #-------------------For predicted-----------------
+    hot_dog_chart1 = BarChart("hot_dogs1", options={"title": "Employee Churn",
+                                                  "width": 500,
+                                                  "height": 300})
+    hot_dog_chart1.add_column("string", "Employee Status")
+    hot_dog_chart1.add_column("number", "No.of Employees")
+    hot_dog_chart1.add_rows([["left", int(test_left_count)],
+                            ["Not left", int(test_notleft_count)]])
+    charts.register(hot_dog_chart1)
+    pie_chart1 = PieChart("pie_chart1", options={"title": "Employee Churn",
+                                               "width": 500,
+                                               "height": 300})
+    pie_chart1.add_column("string", "Employee Status")
+    pie_chart1.add_column("number", "Number")
+    pie_chart1.add_rows([["left", int(test_left_count)],
+                        ["Not left", int(test_notleft_count)]])
+    charts.register(pie_chart1)
+    return render_template("index.html")
 
 
 
