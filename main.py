@@ -3,12 +3,12 @@ from flask import Markup
 from flask import Flask, request, render_template, url_for, session, redirect, g, jsonify
 import os
 import pymysql
-from flask_googlecharts import GoogleCharts, MaterialLineChart, PieChart
+from flask_googlecharts import GoogleCharts, MaterialLineChart, PieChart, Histogram
 from flask_googlecharts import BarChart
 from flask_googlecharts.utils import prep_data
 import datetime
 from ChurnPred import churn
-
+import numpy as np
 
 app = Flask(__name__)
 charts = GoogleCharts()
@@ -67,6 +67,21 @@ def chart2():
                         ["Sleep",7],
                        ["others",3]])
     charts.register(pie_chart)
+    obj=churn()
+    satisfaction_level = obj.satisfaction_level
+    sat_left = np.array(satisfaction_level[1])
+    list = []
+    for i in range(len(satisfaction_level.index.values)):
+        list1 = [str(satisfaction_level.index.values[i]), int(sat_left[i])]
+        list.append(list1)
+    hist = Histogram("hist",
+                     options={"title": "Satisfaction_level Vs Left",
+                              "width": 500,
+                              "height": 300})
+    hist.add_column("string", "Satisfcation")
+    hist.add_column("number", "#left")
+    hist.add_rows(list)
+    charts.register(hist)
     return render_template("GoogleChart.html")
 
 @app.route('/')
@@ -117,7 +132,71 @@ def index():
     pie_chart1.add_rows([["left", int(test_left_count)],
                         ["Not left", int(test_notleft_count)]])
     charts.register(pie_chart1)
+
+
+    satisfaction_level=obj.satisfaction_level
+    sat_left=np.array(satisfaction_level[1])
+    satisfaction_chart1 = MaterialLineChart("satisfaction_chart1",
+                                         options={"title": "Satisfaction_level Vs Left",
+                                                  "width": 1000,
+                                                  "height": 300})
+
+    satisfaction_chart1.add_column("string", "Satisfcation")
+    satisfaction_chart1.add_column("number", "Percentage left")
+    list=[]
+    for i in range(len(satisfaction_level.index.values)):
+        list1 = [str(satisfaction_level.index.values[i]), int(sat_left[i])]
+        list.append(list1)
+    satisfaction_chart1.add_rows(list)
+    charts.register(satisfaction_chart1)
+
+    sal_chart=MaterialLineChart("sal_chart",
+                                options={"title":"Salary Vs Left",
+                                         "width":500,
+                                         "height":300})
+    sal=obj.sal
+    sal_val=[]
+    for i in range(len(sal.index.values)):
+        listi=[str(sal.index.values[i]),int(sal[1][i])]
+        sal_val.append(listi)
+
+    sal_chart.add_column("string","Salary")
+    sal_chart.add_column("number","Percentage Left")
+    sal_chart.add_rows(sal_val)
+    charts.register(sal_chart)
+
+    prom_chart = BarChart("prom_chart",
+                                  options={"title": "Promotion in last 5 years Vs Left",
+                                           "width": 500,
+                                           "height": 300})
+    prom = obj.prom
+    prom_val = []
+    for i in range(len(prom.index.values)):
+        listp = [str(prom.index.values[i]), int(prom[1][i])]
+        prom_val.append(listp)
+
+    prom_chart.add_column("string", "Promotion last 5 years")
+    prom_chart.add_column("number", "Percentage Left")
+    prom_chart.add_rows(prom_val)
+    charts.register(prom_chart)
+
+    dep_chart = BarChart("dep_chart",
+                          options={"title": "Department Vs Left",
+                                   "width": 500,
+                                   "height": 300})
+    dep = obj.Dep
+    dep_val = []
+    for i in range(len(dep.index.values)):
+        listd = [str(dep.index.values[i]), int(dep[1][i])]
+        dep_val.append(listd)
+
+    dep_chart.add_column("string", "Department")
+    dep_chart.add_column("number", "Percentage Left")
+    dep_chart.add_rows(dep_val)
+    charts.register(dep_chart)
     return render_template("index.html")
+
+
 
 
 
