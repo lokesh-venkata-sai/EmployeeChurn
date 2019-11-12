@@ -20,7 +20,7 @@
                 <div class="col-md-6 col-md-offset-3 form-container">
                     <h2>Employee Satisfaction Calculator</h2> 
                     <p> Please provide your feedback below: </p><br><br>
-                    <form role="form" method="post" id="reused_form">
+                    <form role="form" method="post" id="reused_form" action="Form">
                     	<h3>Section 1 - Extrinsic Rewards</h3>
                         <div class="row">
                             <div class="col-sm-12 form-group">
@@ -561,14 +561,18 @@
                                 <input type="text" class="form-control" id="eid" name="eid" required>
                             </div>
                         </div>
+                        {% if post == True %}
+                            <p id="demo" style="color:green">Registered Successfully! </p>
+                        {% elif post == False %}
+                            <p id="demo1" style="color:red">Error Occured, Try Again!</p>
+                        {% endif %}
                         <div class="row">
                             <div class="col-sm-12 form-group">
-                                <button type="submit" class="btn btn-lg btn-warning btn-block" >Post </button>
+                                <input type="submit" value="Post" name="login_btn" id="login_btn" class="btn  login_btn">
                             </div>
                         </div>
+
                     </form>
-                    <div id="success_message" style="width:100%; height:100%; display:none; "> <h3>Posted your feedback successfully!</h3> </div>
-                    <div id="error_message" style="width:100%; height:100%; display:none; "> <h3>Error</h3> Sorry there was an error sending your form. </div>
                 </div>
             </div>
         </div>

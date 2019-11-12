@@ -16,9 +16,34 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     {{ charts_init }}
+    <style>
+        body{
+        background:white;
+        }
+    </style>
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top bg-dark navbar-dark navbar-expand-md">
+    <a class="navbar-brand" href="home" style="color:red;">HR Dashboard</a>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="EmployeeSatisfaction.html"><span class="glyphicon glyphicon-user"></span>Employee Form</a></li>
+        </ul>
+    </div>
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+</nav>
 <h1>HR Dashboard</h1>
+<div class="container-fluid">
 <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12 my-auto">
         <h2>Bar Chart</h2>
@@ -43,15 +68,17 @@
 
 </div>
 <div class="row">
-    <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12 my-auto">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 my-auto">
         <h2>Satisfaction Chart</h2>
         {{charts.satisfaction_chart1}}
     </div>
+
+</div>
+    <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12 my-auto">
         {{charts.sal_chart}}
     </div>
-
-</div>
+    </div>
 <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12 my-auto">
         <h2>Promotion chart</h2>
@@ -61,6 +88,7 @@
         {{charts.dep_chart}}
     </div>
 
+</div>
 </div>
 </body>
 </html>
