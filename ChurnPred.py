@@ -11,10 +11,21 @@ class churn:
     data = pd.read_csv('HR_comma_sep.csv')
     left = data.groupby('left')
     #print(left.mean())
-    satisfaction_level=pd.crosstab(data.satisfaction_level,data.left, normalize='index').round(4)*100
+    satisfaction_level=pd.crosstab(data.satisfaction_level,data.left)
+    bins = np.arange(0, 1.1, 0.2)
+    ind = np.digitize(satisfaction_level.index, bins)
+
+    satisfaction_level = satisfaction_level.groupby(ind).sum()
+    satisfaction_level.index = np.array(bins)
+    #print(satisfaction_level)
+    satisfaction_level[[0, 1]] = satisfaction_level[[0, 1]].apply(lambda x: x / x.sum() * 100, axis=1)
+
     sal = pd.crosstab(data.salary, data.left, normalize='index').round(4) * 100
+    sal=sal.sort_values(0,ascending=False)
     prom = pd.crosstab(data.promotion_last_5years, data.left, normalize='index').round(4) * 100
     Dep = pd.crosstab(data.Departments, data.left, normalize='index').round(4) * 100
+    Dep=Dep.sort_values(by=[1])
+    #print(Dep)
     left_count=data.left.value_counts()
     # creating labelEncoder
     le = preprocessing.LabelEncoder()
