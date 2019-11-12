@@ -141,11 +141,11 @@ def index():
                                                   "width": 1000,
                                                   "height": 300})
 
-    satisfaction_chart1.add_column("string", "Satisfcation")
+    satisfaction_chart1.add_column("number", "Satisfcation")
     satisfaction_chart1.add_column("number", "Percentage left")
     list=[]
     for i in range(len(satisfaction_level.index.values)):
-        list1 = [str(satisfaction_level.index.values[i]), int(sat_left[i])]
+        list1 = [int(satisfaction_level.index.values[i]), int(sat_left[i])]
         list.append(list1)
     satisfaction_chart1.add_rows(list)
     charts.register(satisfaction_chart1)
@@ -197,7 +197,9 @@ def index():
     return render_template("index.html")
 
 
-
+@app.route('/employeeform')
+def employeeform():
+    return render_template("EmployeeSatisfaction.html")
 
 
 if __name__ == "__main__":
