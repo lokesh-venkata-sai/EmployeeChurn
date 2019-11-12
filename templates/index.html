@@ -10,16 +10,51 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../static/form.css" >
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <title>Flask-GoogleCharts Example</title>
+    <title>Employee Churn Dashboard</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     {{ charts_init }}
     <style>
-        body{
-        background:white;
-        }
+
+html,
+body {
+	height: 100%;
+}
+.imagebg {
+	background-image: url("images/mixing-desk-351478_1920.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-filter: blur(3px);
+  filter: blur(3px);
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+.form-container
+{
+	background-color: #fff;
+    box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 20px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+.indexbody {
+    background-color: black;
+}
+.row {
+    background-color: #20bf55;
+    background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+}
+
     </style>
 </head>
 <body>
@@ -27,7 +62,7 @@
     <a class="navbar-brand" href="" style="color:red;">HR Dashboard</a>
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li class="active"><a href="">Home</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -54,7 +89,6 @@
         {{charts.pie_chart}}
     </div>
 </div>
-<h3 align="center">Predicted</h3>
 <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12 my-auto">
         <h2>Pie Chart</h2>
@@ -70,9 +104,8 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 my-auto">
         <h2>Satisfaction Chart</h2>
-        {{charts.satisfaction_chart1}}
+        {{charts.satisfaction_chart1}}<br><br>
     </div>
-
 </div>
     <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12 my-auto">
