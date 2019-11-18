@@ -9,7 +9,7 @@ from flask_googlecharts.utils import prep_data
 import datetime
 from ChurnPred import churn
 import numpy as np
-
+from feedback import feedback
 app = Flask(__name__)
 charts = GoogleCharts()
 charts.init_app(app)
@@ -202,9 +202,16 @@ def employeeform():
     return render_template("EmployeeSatisfaction.html")
 
 @app.route('/Form', methods=['GET', 'POST'])
-def loginForm():
+def Form():
     result = request.form
-    return render_template("EmployeeSatisfaction.html", post=True)
+    #print(result)
+    obj=feedback()
+    ans=obj.insertfeedback(**result)
+
+    if ans == True:
+        return render_template("EmployeeSatisfaction.html", post=True)
+    else:
+        return render_template("EmployeeSatisfaction.html", post=False)
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
