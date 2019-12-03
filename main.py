@@ -9,6 +9,7 @@ from flask_googlecharts.utils import prep_data
 import datetime
 from ChurnPred import churn
 import numpy as np
+from Employees import Employee
 from feedback import feedback
 app = Flask(__name__)
 charts = GoogleCharts()
@@ -204,8 +205,12 @@ def employeeform():
 
 @app.route('/EmployeeList.html')
 def employeelist():
-    return render_template("EmployeeList.html")
-
+    obj=Employee()
+    users=obj.getEmployeeList()
+    if users==False:
+        return render_template("EmployeeList.html",users=False)
+    else:
+        return render_template("EmployeeList.html", users=users)
 
 
 @app.route('/Form', methods=['GET', 'POST'])

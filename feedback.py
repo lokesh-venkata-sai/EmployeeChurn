@@ -1,7 +1,7 @@
 import pymysql
 
 mysql_server="localhost"
-
+password="lokesh1999"
 class feedback():
     def validateuser(self,**data):
         self.name = data['name']
@@ -9,7 +9,7 @@ class feedback():
         self.eid = data['eid']
 
         # Open database connection
-        db = pymysql.connect(mysql_server, "root", "lokesh1999", "employee")
+        db = pymysql.connect(mysql_server, "root", password, "employee")
         # prepare a cursor object using cursor() method
         db.autocommit(False)
         cursor = db.cursor()
@@ -49,7 +49,7 @@ class feedback():
         isuser=obj.validateuser(**result)
         if isuser:
             # Open database connection
-            db = pymysql.connect(mysql_server, "root", "lokesh1999", "employee")
+            db = pymysql.connect(mysql_server, "root", password, "employee")
             # prepare a cursor object using cursor() method
             db.autocommit(False)
             cursor = db.cursor()
