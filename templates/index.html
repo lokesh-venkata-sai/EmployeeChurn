@@ -51,10 +51,14 @@ body {
     background-color: black;
 }
 .row {
-    background-color: #20bf55;
+    #background-color: white;
     background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 }
 
+h2{
+    #background-color: black;
+    #color:white;
+}
     </style>
 </head>
 <body>
@@ -63,7 +67,7 @@ body {
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
             <li class="active"><a href="">Home</a></li>
-
+            <li><a href="EmployeeList.html" >Employee Form</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="EmployeeSatisfaction.html" target="_blank"><span class="glyphicon glyphicon-user"></span>Employee Form</a></li>
@@ -117,6 +121,7 @@ body {
         {{charts.prom_chart}}
     </div>
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12 my-auto">
+        <h2>Department chart</h2>
         {{charts.dep_chart}}
     </div>
 

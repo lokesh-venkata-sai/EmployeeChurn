@@ -201,6 +201,13 @@ def index():
 def employeeform():
     return render_template("EmployeeSatisfaction.html")
 
+
+@app.route('/EmployeeList.html')
+def employeelist():
+    return render_template("EmployeeList.html")
+
+
+
 @app.route('/Form', methods=['GET', 'POST'])
 def Form():
     result = request.form
