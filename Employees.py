@@ -16,7 +16,7 @@ class Employee():
             print("Error: unable to fetch data")
         db.close()
         if users:
-            print(users)
+            #print(users)
             return users
         else:
             return False
