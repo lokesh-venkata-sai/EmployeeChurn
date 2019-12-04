@@ -89,6 +89,13 @@ class feedback():
         obj=feedback()
         isuser=obj.validateuser(**result)
         isfeed = obj.isfeedback(**result)
+        satisfaction = int(result['q1'])*0.03+int(result['q2'])*0.03\
+                        +int(result['q3'])*0.005+int(result['q4'])*0.005+int(result['q5'])*0.005+int(result['q6'])*0.005\
+                        +int(result['q7'])*0.01+int(result['q8'])*0.01\
+                        +int(result['q9'])*0.0066+int(result['q10'])*0.0066+int(result['q11'])*0.0068\
+                        +int(result['q12'])*0.01+int(result['q13'])*0.01\
+                        +int(result['q14'])*0.0066+int(result['q15'])*0.0066+int(result['q16'])*0.0068\
+                        +int(result['q17'])*0.0132+int(result['q18'])*0.0132+int(result['q19'])*0.0136
         print(isfeed)
         if isuser:
             # Open database connection
@@ -160,7 +167,7 @@ class feedback():
 
 
                 sql = "UPDATE users SET satisfaction=%s,churn=%s where id=%s"
-                val = (2, 0,int(self.eid))
+                val = (satisfaction, 0,int(self.eid))
                 print("going to replace in users")
                 try:
                     # print("in try")
