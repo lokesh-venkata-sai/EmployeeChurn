@@ -121,7 +121,7 @@ class feedback():
 
 
                 sql = "UPDATE users SET satisfaction=%s,churn=%s where id=%s"
-                val = (satisfaction, 0, self.eid)
+                val = (2, 0, self.eid)
 
                 try:
                     # print("in try")
