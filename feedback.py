@@ -3,6 +3,11 @@ from ChurnPred import churn
 mysql_server="localhost"
 password="lokesh1999"
 class feedback():
+    def predictChurn(self,satisfaction):
+        obj = churn()
+        churn_pred=obj.gb.predict()
+        return True
+
     def validateuser(self,**data):
         self.name = data['name']
         self.email = data['email']
@@ -114,8 +119,7 @@ class feedback():
                     return False
 
 
-                obj=churn()
-                #churn_pred=obj.gb.predict()
+
                 sql = "UPDATE users SET satisfaction=%s,churn=%s where id=%s"
                 val = (2, 0, self.eid)
 
