@@ -17,8 +17,8 @@ with webdriver.Firefox() as driver:
     for each in radio_buttons:
         each.click()
     driver.find_element_by_name("comments").send_keys("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-    driver.find_element_by_name("name").send_keys("exam1")
-    driver.find_element_by_name("email").send_keys("exam1@gmail.com")
-    driver.find_element_by_name("eid").send_keys("456")
+    driver.find_element_by_name("name").send_keys("John Doe")
+    driver.find_element_by_name("email").send_keys("user@email.com")
+    driver.find_element_by_name("eid").send_keys("111")
     driver.find_element_by_id("login_btn").click()
-    time.sleep(30)
+    time.sleep(10)
