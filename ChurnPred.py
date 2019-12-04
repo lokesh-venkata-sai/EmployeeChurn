@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt # for plotting graphs
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import classification_report, confusion_matrix
 import numpy as np
 class churn:
     data = pd.read_csv('HR_comma_sep.csv')
@@ -49,3 +50,5 @@ class churn:
     y_pred = gb.predict(X_test)
     y_pred = pd.DataFrame(y_pred)
     pred_count=y_pred[0].value_counts()
+    print(confusion_matrix(y_test,y_pred))
+    print(classification_report(y_test,y_pred))
